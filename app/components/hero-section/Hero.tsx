@@ -110,11 +110,22 @@ export default function Hero() {
       </div>
 
       {/* IMAGE */}
-      <div>
+      <div className="w-full sm:w-auto flex justify-center">
         <motion.div
           ref={imgRef}
           style={{ rotate }}
-          className="h-image flex items-center w-[480px] h-[480px] xl:w-[500px] xl:h-[550px] justify-center relative"
+          className="
+            relative
+            aspect-square
+            w-[220px]
+            sm:w-[260px]
+            md:w-[320px]
+            lg:w-[380px]
+            xl:w-[420px]
+            flex
+            items-center
+            justify-center
+          "
           initial={{ opacity: 0 }}
           animate={animateIn1}
         >
@@ -123,9 +134,16 @@ export default function Hero() {
             priority
             fill
             alt="Shourya-Profile-Picture"
-            className="bg-image-radial px-10 pt-20"
+            className="
+              bg-image-radial
+              rounded-2xl
+              object-cover
+              object-center
+              scale-[0.92]
+            "
           />
         </motion.div>
+
       </div>
     </section>
   );

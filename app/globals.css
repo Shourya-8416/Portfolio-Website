@@ -6,6 +6,11 @@
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   background: #08233b;
   color: white;
@@ -30,13 +35,11 @@ body {
   -webkit-mask-size: 390px 390px;
   -webkit-mask-repeat: no-repeat;
   z-index: -10;
-  /* transform: rotate(-15deg); */
-  /* Since I cannot achieve the particular effect I wanted to create, I can make it scroll */
 }
 
 @media (max-width: 1280px) {
   .h-image {
-    -webkit-mask-size: 300px 300px;
+    -webkit-mask-size: 350px 350px;
   }
 }
 
@@ -46,9 +49,15 @@ body {
   }
 }
 
-@media (max-width: 415px) {
+@media (max-width: 768px) {
   .h-image {
-    -webkit-mask-size: 270px 270px;
+    -webkit-mask-size: 260px 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .h-image {
+    -webkit-mask-size: 220px 220px;
   }
 }
 
