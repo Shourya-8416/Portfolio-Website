@@ -4,19 +4,16 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import { getAllPosts, getPostBySlug, calculateReadingTime } from "@/utils/blog";
-import { BlogPostContent, GiscusComments } from "@/app/components/blog";
+import { GiscusComments } from "@/app/components/blog";
 import Footer from "@/app/components/contact+footer/Footer";
 import BlogPageWrapper from "../BlogPageWrapper";
+import BlogPostContentClient from "./BlogPostContentClient";
+
+// Force dynamic rendering to avoid SSG issues with MDXRemote
+export const dynamic = "force-dynamic";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.metadata.slug,
-  }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
@@ -62,12 +59,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <BlogPageWrapper>
       <main className="min-h-screen pt-32 sm:pt-40 pb-20">
-        <BlogPostContent
+        <BlogPostContentClient
           title={post.metadata.title}
           date={post.metadata.date}
           readingTime={readingTime}
           tags={post.metadata.tags}
-          content={mdxSource}
+          source={mdxSource}
         />
 
         <div className="max-w-3xl mx-auto">

@@ -3,24 +3,14 @@ import React from "react";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { motion } from "framer-motion";
-import YouTube from "./mdx/YouTube";
-import Tweet from "./mdx/Tweet";
-import Callout from "./mdx/Callout";
 
-export interface BlogPostContentProps {
+interface BlogPostContentClientProps {
   title: string;
   date: string;
   readingTime: string;
   tags: string[];
-  content: MDXRemoteSerializeResult;
+  source: MDXRemoteSerializeResult;
 }
-
-// Define components inline to avoid import issues
-const components = {
-  YouTube,
-  Tweet,
-  Callout,
-};
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -58,13 +48,13 @@ const contentVariants = {
   },
 };
 
-export default function BlogPostContent({
+export default function BlogPostContentClient({
   title,
   date,
   readingTime,
   tags,
-  content,
-}: BlogPostContentProps) {
+  source,
+}: BlogPostContentClientProps) {
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -72,7 +62,7 @@ export default function BlogPostContent({
   });
 
   return (
-    <motion.article 
+    <motion.article
       className="max-w-3xl mx-auto"
       initial="hidden"
       animate="visible"
@@ -84,7 +74,7 @@ export default function BlogPostContent({
           href="/blog"
           className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 group"
         >
-          <motion.span 
+          <motion.span
             aria-hidden="true"
             whileHover={{ x: -4 }}
             transition={{ duration: 0.2 }}
@@ -127,7 +117,7 @@ export default function BlogPostContent({
         className="prose prose-invert prose-lg max-w-none"
         variants={contentVariants}
       >
-        <MDXRemote {...content} components={components} />
+        <MDXRemote {...source} />
       </motion.div>
     </motion.article>
   );
