@@ -1,6 +1,7 @@
 import { useView } from "@/contexts/ViewContext";
 import React, { SetStateAction } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
 
@@ -10,6 +11,8 @@ export default function MobileMenu({
   onMenuOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const { sectionInView } = useView();
+  const pathname = usePathname();
+  const isBlogPage = pathname?.startsWith("/blog");
 
   return (
     <motion.div
@@ -23,26 +26,26 @@ export default function MobileMenu({
         onClick={() => onMenuOpen(false)}
       >
         <Link
-          href="#home"
-          className={`${sectionInView === "home" && "text-white"} w-fit`}
+          href={isBlogPage ? "/#home" : "#home"}
+          className={`${!isBlogPage && sectionInView === "home" && "text-white"} w-fit`}
         >
           Home
         </Link>
         <Link
-          href="#work"
-          className={`${sectionInView === "work" && "text-white"} w-fit`}
+          href={isBlogPage ? "/#work" : "#work"}
+          className={`${!isBlogPage && sectionInView === "work" && "text-white"} w-fit`}
         >
           Work
         </Link>
         <Link
-          href="#about"
-          className={`${sectionInView === "about" && "text-white"} w-fit`}
+          href={isBlogPage ? "/#about" : "#about"}
+          className={`${!isBlogPage && sectionInView === "about" && "text-white"} w-fit`}
         >
           About
         </Link>
         <Link
-          href="#contact"
-          className={`${sectionInView === "contact" && "text-white"}  w-fit`}
+          href={isBlogPage ? "/#contact" : "#contact"}
+          className={`${!isBlogPage && sectionInView === "contact" && "text-white"}  w-fit`}
         >
           Contact
         </Link>

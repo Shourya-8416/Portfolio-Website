@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Header from "./components/header-section/Header";
 import { ViewProvider } from "@/contexts/ViewContext";
+import BlobityProvider from "./components/BlobityProvider";
 
 const kumbhSans = Kumbh_Sans({ subsets: ["latin"] });
 
@@ -75,8 +76,10 @@ export default function RootLayout({
         className={`${kumbhSans.className} max-w-[90%] xl:max-w-[1223px] w-full mx-auto overflow-x-hidden`}
       >
         <ViewProvider>
-          <Header />
-          {children}
+          <BlobityProvider>
+            <Header />
+            {children}
+          </BlobityProvider>
         </ViewProvider>
         <Analytics />
         <SpeedInsights />
