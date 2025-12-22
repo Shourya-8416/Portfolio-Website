@@ -3,6 +3,16 @@ import React from "react";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { motion } from "framer-motion";
+import YouTube from "@/app/components/blog/mdx/YouTube";
+import Tweet from "@/app/components/blog/mdx/Tweet";
+import Callout from "@/app/components/blog/mdx/Callout";
+
+// MDX components mapping
+const mdxComponents = {
+  YouTube,
+  Tweet,
+  Callout,
+};
 
 interface BlogPostContentClientProps {
   title: string;
@@ -117,7 +127,7 @@ export default function BlogPostContentClient({
         className="prose prose-invert prose-lg max-w-none"
         variants={contentVariants}
       >
-        <MDXRemote {...source} />
+        <MDXRemote {...source} components={mdxComponents} />
       </motion.div>
     </motion.article>
   );
