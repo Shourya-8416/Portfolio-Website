@@ -40,39 +40,44 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  try {
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
 
-  if (!post) {
-    notFound();
+    if (!post) {
+      notFound();
+    }
+
+    const mdxSource = await serialize(post.content, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [rehypeHighlight, rehypeSlug],
+      },
+    });
+
+    const readingTime = calculateReadingTime(post.content);
+
+    return (
+      <BlogPageWrapper>
+        <main className="min-h-screen pt-32 sm:pt-40 pb-20">
+          <BlogPostContentClient
+            title={post.metadata.title}
+            date={post.metadata.date}
+            readingTime={readingTime}
+            tags={post.metadata.tags}
+            source={mdxSource}
+          />
+
+          <div className="max-w-3xl mx-auto">
+            <GiscusComments />
+          </div>
+
+          <Footer />
+        </main>
+      </BlogPageWrapper>
+    );
+  } catch (error) {
+    console.error("Error rendering blog post:", error);
+    throw error; // Re-throw to trigger error boundary
   }
-
-  const mdxSource = await serialize(post.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeHighlight, rehypeSlug],
-    },
-  });
-
-  const readingTime = calculateReadingTime(post.content);
-
-  return (
-    <BlogPageWrapper>
-      <main className="min-h-screen pt-32 sm:pt-40 pb-20">
-        <BlogPostContentClient
-          title={post.metadata.title}
-          date={post.metadata.date}
-          readingTime={readingTime}
-          tags={post.metadata.tags}
-          source={mdxSource}
-        />
-
-        <div className="max-w-3xl mx-auto">
-          <GiscusComments />
-        </div>
-
-        <Footer />
-      </main>
-    </BlogPageWrapper>
-  );
 }
