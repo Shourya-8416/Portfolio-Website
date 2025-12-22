@@ -8,13 +8,14 @@ export default function BlobityProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const blobity = useBlobity(initialBlobityOptions);
+  const blobityRef = useBlobity(initialBlobityOptions);
 
   useEffect(() => {
+    const blobity = blobityRef?.current;
     if (blobity && typeof blobity.updateOptions === "function") {
       blobity.updateOptions(initialBlobityOptions);
     }
-  }, [blobity]);
+  }, [blobityRef]);
 
   return <>{children}</>;
 }
