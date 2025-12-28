@@ -17,6 +17,8 @@ export interface BlogCardProps {
   commentCount?: number;
   reactionCount?: number;
   index?: number;
+  variant?: 'blog' | 'section';
+  href?: string;
 }
 
 const cardVariants = {
@@ -47,6 +49,8 @@ export default function BlogCard({
   commentCount = 0,
   reactionCount = 0,
   index = 0,
+  variant = 'blog',
+  href,
 }: BlogCardProps) {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -60,8 +64,11 @@ export default function BlogCard({
     day: "numeric",
   });
 
+  const linkHref = href ?? `/blog/${slug}`;
+  const cardClassName = `h-full rounded-[20px] std-backdrop-blur bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] p-5 flex flex-col gap-4 hover:from-[#d9d9d92f] hover:to-[#7373732f]${variant === 'section' ? ' section-card-deck' : ''}`;
+
   return (
-    <Link href={`/blog/${slug}`} className="block group">
+    <Link href={linkHref} className="block group">
       <motion.article
         ref={ref}
         custom={index}
@@ -72,7 +79,7 @@ export default function BlogCard({
           scale: 1.02,
           transition: { duration: 0.2 }
         }}
-        className="h-full rounded-[20px] std-backdrop-blur bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] p-5 flex flex-col gap-4 hover:from-[#d9d9d92f] hover:to-[#7373732f]"
+        className={cardClassName}
         data-blobity-magnetic="false"
       >
         {featuredImage && (
@@ -115,12 +122,12 @@ export default function BlogCard({
 
           <div className="flex items-center gap-4 text-sm text-white/60 mt-auto pt-2 border-t border-white/10">
             <span className="flex items-center gap-1">
-              <span aria-hidden="true">💬</span>
-              <span>{commentCount}</span>
-            </span>
-            <span className="flex items-center gap-1">
               <span aria-hidden="true">❤️</span>
               <span>{reactionCount}</span>
+            </span>
+            <span className="flex items-center gap-1">
+              <span aria-hidden="true">💬</span>
+              <span>{commentCount}</span>
             </span>
           </div>
         </div>

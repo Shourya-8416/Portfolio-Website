@@ -380,3 +380,38 @@ body {
 .giscus-wrapper iframe {
   cursor: auto !important;
 }
+
+/* Section Card - Deck of Cards Effect */
+.section-card-deck {
+  position: relative;
+}
+
+.section-card-deck::before,
+.section-card-deck::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: linear-gradient(to right, rgba(217, 217, 217, 0.08), rgba(115, 115, 115, 0.08));
+  z-index: -1;
+  transition: transform 0.3s ease;
+}
+
+.section-card-deck::before {
+  transform: rotate(-3deg) translateY(4px);
+}
+
+.section-card-deck::after {
+  transform: rotate(-6deg) translateY(8px);
+}
+
+.section-card-deck:hover::before {
+  transform: rotate(-4deg) translateY(6px);
+}
+
+.section-card-deck:hover::after {
+  transform: rotate(-8deg) translateY(10px);
+}

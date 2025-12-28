@@ -13,6 +13,8 @@ export default function MobileMenu({
   const { sectionInView } = useView();
   const pathname = usePathname();
   const isBlogPage = pathname?.startsWith("/blog");
+  const isProjectsPage = pathname === "/projects";
+  const isSubPage = isBlogPage || isProjectsPage;
 
   return (
     <motion.div
@@ -26,26 +28,32 @@ export default function MobileMenu({
         onClick={() => onMenuOpen(false)}
       >
         <Link
-          href={isBlogPage ? "/#home" : "#home"}
-          className={`${!isBlogPage && sectionInView === "home" && "text-white"} w-fit`}
+          href={isSubPage ? "/#home" : "#home"}
+          className={`${!isSubPage && sectionInView === "home" && "text-white"} w-fit`}
         >
           Home
         </Link>
         <Link
-          href={isBlogPage ? "/#work" : "#work"}
-          className={`${!isBlogPage && sectionInView === "work" && "text-white"} w-fit`}
-        >
-          Work
-        </Link>
-        <Link
-          href={isBlogPage ? "/#about" : "#about"}
-          className={`${!isBlogPage && sectionInView === "about" && "text-white"} w-fit`}
+          href={isSubPage ? "/#about" : "#about"}
+          className={`${!isSubPage && sectionInView === "about" && "text-white"} w-fit`}
         >
           About
         </Link>
         <Link
-          href={isBlogPage ? "/#contact" : "#contact"}
-          className={`${!isBlogPage && sectionInView === "contact" && "text-white"}  w-fit`}
+          href={isSubPage ? "/#experience" : "#experience"}
+          className={`${!isSubPage && sectionInView === "work" && "text-white"} w-fit`}
+        >
+          Work
+        </Link>
+        <Link
+          href={isSubPage ? "/#projects" : "#projects"}
+          className={`${(isProjectsPage || (!isSubPage && sectionInView === "projects")) && "text-white"} w-fit`}
+        >
+          Projects
+        </Link>
+        <Link
+          href={isSubPage ? "/#contact" : "#contact"}
+          className={`${!isSubPage && sectionInView === "contact" && "text-white"}  w-fit`}
         >
           Contact
         </Link>

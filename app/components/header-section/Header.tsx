@@ -13,6 +13,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   const isBlogPage = pathname?.startsWith("/blog");
+  const isProjectsPage = pathname === "/projects";
+  const isSubPage = isBlogPage || isProjectsPage;
 
   return (
     <>
@@ -40,26 +42,37 @@ export default function Header() {
 
           <ul className="hidden sm:flex gap-8 lg:gap-12 text-white/25">
             <Link
-              href={isBlogPage ? "/#home" : "#home"}
-              className={`${!isBlogPage && sectionInView === "home" && "text-white"} hover:text-white transition-colors`}
+              href={isSubPage ? "/#home" : "#home"}
+              className={`${!isSubPage && sectionInView === "home" && "text-white"} hover:text-white transition-colors`}
+              data-blobity-radius="4"
             >
               Home
             </Link>
             <Link
-              href={isBlogPage ? "/#about" : "#about"}
-              className={`${!isBlogPage && sectionInView === "about" && "text-white"} hover:text-white transition-colors`}
+              href={isSubPage ? "/#about" : "#about"}
+              className={`${!isSubPage && sectionInView === "about" && "text-white"} hover:text-white transition-colors`}
+              data-blobity-radius="4"
             >
               About
-            </Link>            
+            </Link>
             <Link
-              href={isBlogPage ? "/#work" : "#work"}
-              className={`${!isBlogPage && sectionInView === "work" && "text-white"} hover:text-white transition-colors`}
+              href={isSubPage ? "/#experience" : "#experience"}
+              className={`${!isSubPage && sectionInView === "work" && "text-white"} hover:text-white transition-colors`}
+              data-blobity-radius="4"
             >
               Work
             </Link>
             <Link
-              href={isBlogPage ? "/#contact" : "#contact"}
-              className={`${!isBlogPage && sectionInView === "contact" && "text-white"} hover:text-white transition-colors`}
+              href={isSubPage ? "/#projects" : "#projects"}
+              className={`${(isProjectsPage || (!isSubPage && sectionInView === "projects")) && "text-white"} hover:text-white transition-colors`}
+              data-blobity-radius="4"
+            >
+              Projects
+            </Link>
+            <Link
+              href={isSubPage ? "/#contact" : "#contact"}
+              className={`${!isSubPage && sectionInView === "contact" && "text-white"} hover:text-white transition-colors`}
+              data-blobity-radius="4"
             >
               Contact
             </Link>
@@ -68,16 +81,17 @@ export default function Header() {
             <Link
               target="_blank"
               href="https://www.linkedin.com/in/shaurya-mishra-b380711a5/"
+              data-blobity-radius="10"
             >
               <Icon icon="hugeicons:linkedin-01" />
             </Link>
-            <Link target="_blank" href="https://github.com/Shourya-8416">
+            <Link target="_blank" href="https://github.com/Shourya-8416" data-blobity-radius="10">
               <Icon icon="hugeicons:github" />
             </Link>
-            <Link target="_blank" href="https://x.com/shauryamishra_">
+            <Link target="_blank" href="https://x.com/shauryamishra_" data-blobity-radius="10">
               <Icon icon="akar-icons:x-fill" />
             </Link>
-            <Link href="/blog" className={isBlogPage ? "text-[#E3D3BE]" : ""}>
+            <Link href="/blog" className={isBlogPage ? "text-[#E3D3BE]" : ""} data-blobity-radius="10">
               <Icon icon="mdi:post-outline" />
             </Link>
           </div>

@@ -36,12 +36,12 @@ const TimelineData = [
   },
 ];
 
-export default function Timeline() {
+export default function Experience() {
   const { setSectionInView } = useView();
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
-    rootMargin: "-50px 0px -50% 0px",
+    threshold: 0.15,
+    rootMargin: "-100px 0px -40% 0px",
   });
 
   useEffect(() => {
@@ -49,8 +49,8 @@ export default function Timeline() {
   }, [inView, setSectionInView]);
 
   return (
-    <div id="experience" className="mt-10 md:mt-[110px]" ref={ref}>
-      <Title> Work experience</Title>
+    <section id="experience" className="pt-[110px]" ref={ref}>
+      <Title>Work Experience</Title>
 
       <div className="flex mt-6 gap-4 pl-3">
         <div className="w-3 h-auto bg-gradient-to-b from-white to-transparent" />
@@ -69,6 +69,6 @@ export default function Timeline() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

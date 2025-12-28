@@ -162,8 +162,14 @@ export async function getAllDiscussionMetrics(): Promise<Map<string, DiscussionM
     const discussions = response.repository.discussions.nodes;
     
     for (const discussion of discussions) {
-      // Extract slug from discussion title (assuming title matches slug or contains it)
-      const slug = discussion.title.toLowerCase().replace(/\s+/g, '-');
+      // Extract slug from discussion title
+      // Handle titles like "blog/building-scalable-apis-with-spring-boot" or just "building-scalable-apis-with-spring-boot"
+      let slug = discussion.title.toLowerCase().replace(/\s+/g, '-');
+      
+      // Remove "blog/" prefix if present
+      if (slug.startsWith('blog/')) {
+        slug = slug.substring(5);
+      }
       
       const metrics: DiscussionMetrics = {
         commentCount: discussion.comments.totalCount,

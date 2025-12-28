@@ -3,14 +3,15 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import { getAllPosts, getPostBySlug, calculateReadingTime } from "@/utils/blog";
+import { calculateReadingTime } from "@/utils/blog";
+import { getPostBySlugRemote } from "@/utils/github-content";
 import { GiscusComments } from "@/app/components/blog";
 import Footer from "@/app/components/contact+footer/Footer";
 import BlogPageWrapper from "../BlogPageWrapper";
 import BlogPostContentClient from "./BlogPostContentClient";
 
-// Force dynamic rendering to avoid SSG issues with MDXRemote
-export const dynamic = "force-dynamic";
+// ISR: Revalidate every 60 seconds for fresh content from GitHub
+export const revalidate = 60;
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -18,7 +19,7 @@ interface BlogPostPageProps {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlugRemote(slug);
 
   if (!post) {
     return {
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   try {
     const { slug } = await params;
-    const post = getPostBySlug(slug);
+    const post = await getPostBySlugRemote(slug);
 
     if (!post) {
       notFound();
