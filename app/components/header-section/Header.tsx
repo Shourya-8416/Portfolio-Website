@@ -18,8 +18,8 @@ export default function Header() {
 
   return (
     <>
-      <div className="fixed max-w-[90%] xl:max-w-[1223px] w-full z-10 select-none">
-        <div className="flex justify-between items-center px-6 py-4 rounded-2xl bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] mt-4 sm:mt-8 std-backdrop-blur">
+      <div className="fixed left-1/2 -translate-x-1/2 max-w-[90%] xl:max-w-[1223px] w-full z-10 select-none pointer-events-none">
+        <div className="flex justify-between items-center px-6 py-4 rounded-2xl bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] mt-4 sm:mt-8 std-backdrop-blur pointer-events-auto">
           <Link href="/">
             <Image
               src="/logo.png"

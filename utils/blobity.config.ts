@@ -4,7 +4,6 @@ export const initialBlobityOptions = {
   focusableElementsOffsetY: 4,
   color: "#E3D3BE",
   dotColor: "#08233b",
-  // color: "#222222",
   invert: true,
   focusableElements:
     "[data-blobity], a:not([data-no-blobity]), button:not([data-no-blobity]), [data-blobity-tooltip]",
@@ -13,8 +12,7 @@ export const initialBlobityOptions = {
   fontWeight: 500,
   opacity: 1,
   fontColor: "#08233b",
-  zIndex: 1000,
-  magnetic: true,
+  zIndex: 35,
+  magnetic: false,
   mode: "normal",
-  kineticMorphing: false,
 };

@@ -88,13 +88,13 @@ export default function RootLayout({
       <head>
         <StructuredData />
       </head>
-      <body
-        className={`${kumbhSans.className} max-w-[90%] xl:max-w-[1223px] w-full mx-auto overflow-x-hidden`}
-      >
+      <body className={`${kumbhSans.className}`}>
         <ViewProvider>
           <BlobityProvider>
             <Header />
-            {children}
+            <div className="max-w-[90%] xl:max-w-[1223px] w-full mx-auto">
+              {children}
+            </div>
           </BlobityProvider>
         </ViewProvider>
         <Analytics />
