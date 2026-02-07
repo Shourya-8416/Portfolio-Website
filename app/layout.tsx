@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "./components/header-section/Header";
 import { ViewProvider } from "@/contexts/ViewContext";
 import BlobityProvider from "./components/BlobityProvider";
+import StructuredData from "./components/StructuredData";
 
 const kumbhSans = Kumbh_Sans({ subsets: ["latin"] });
 
@@ -28,15 +29,21 @@ export const metadata: Metadata = {
     "java portfolio",
     "software engineer portfolio",
   ],
+  authors: [{ name: "Shourya Mishra" }],
+  creator: "Shourya Mishra",
+  metadataBase: new URL("https://shouryamishra.site"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Shourya Mishra | Software Developer",
     description:
       "Software Developer focused on Java backend engineering, GenAI-powered systems, and AWS-based cloud infrastructure. Building scalable, intelligent, production-ready applications.",
-    url: "https://shourya-mishra.vercel.app",
+    url: "https://shouryamishra.site",
     siteName: "Shourya Mishra Portfolio",
     images: [
       {
-        url: "https://shourya-mishra.vercel.app/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Shourya Mishra | Software Developer",
@@ -50,7 +57,8 @@ export const metadata: Metadata = {
     title: "Shourya Mishra | Software Developer",
     description:
       "Java-focused Software Developer working on GenAI integrations and AWS-powered backend systems.",
-    images: ["https://shourya-mishra.vercel.app/og-image.png"],
+    images: ["/og-image.png"],
+    creator: "@shauryamishra_",
   },
   robots: {
     index: true,
@@ -60,9 +68,14 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
     },
   },
   category: "technology",
+  verification: {
+    google: "your-google-verification-code", // Add this after Google Search Console setup
+  },
 };
 
 export default function RootLayout({
@@ -72,6 +85,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData />
+      </head>
       <body
         className={`${kumbhSans.className} max-w-[90%] xl:max-w-[1223px] w-full mx-auto overflow-x-hidden`}
       >
