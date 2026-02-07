@@ -14,5 +14,5 @@ export const initialBlobityOptions = {
   fontColor: "#08233b",
   zIndex: 35,
   magnetic: false,
-  mode: "normal",
+  mode: "normal" as const,
 };
