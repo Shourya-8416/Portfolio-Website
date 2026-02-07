@@ -29,6 +29,17 @@ body {
   }
 }
 
+/* Fix Blobity cursor blocking scroll */
+#blobity,
+#blobity * {
+  pointer-events: none !important;
+}
+
+/* Allow pointer events on interactive elements */
+a, button, input, textarea, select, [data-blobity] {
+  pointer-events: auto !important;
+}
+
 .h-image {
   -webkit-mask-image: url("../public/black.png");
   -webkit-mask-position: center;

@@ -15,4 +15,6 @@ export const initialBlobityOptions = {
   fontColor: "#08233b",
   zIndex: 1000,
   magnetic: true,
+  mode: "normal",
+  kineticMorphing: false,
 };
