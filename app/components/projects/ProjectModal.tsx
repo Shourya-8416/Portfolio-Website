@@ -76,7 +76,7 @@ export default function ProjectModal({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-y-auto transition-opacity duration-300 ${
+      className={`fixed inset-0 z-50 overflow-y-auto transition-opacity duration-300 ${
         isAnimating ? "opacity-100" : "opacity-0"
       }`}
       role="dialog"
@@ -92,38 +92,40 @@ export default function ProjectModal({
         aria-hidden="true"
       />
 
-      {/* Modal Content - matches original full-width card layout */}
-      <div
-        className={`relative w-full max-w-5xl transition-all duration-300 ${
-          isAnimating
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-95 translate-y-4"
-        }`}
-      >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-3 -right-3 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors border border-white/30"
-          aria-label="Close modal"
+      {/* Modal Container with proper padding for mobile */}
+      <div className="min-h-full flex items-center justify-center p-4 sm:p-6 md:p-8 pt-20 sm:pt-6">
+        {/* Modal Content - matches original full-width card layout */}
+        <div
+          className={`relative w-full max-w-5xl my-8 transition-all duration-300 ${
+            isAnimating
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-95 translate-y-4"
+          }`}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          {/* Close Button - positioned to stay visible on mobile */}
+          <button
+            onClick={onClose}
+            className="absolute -top-3 -right-3 sm:-top-3 sm:-right-3 z-10 p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors border border-white/30"
+            aria-label="Close modal"
           >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
 
         {/* Card Content - Horizontal layout matching original */}
-        <div className="w-full rounded-[20px] std-backdrop-blur bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] flex flex-col lg:flex-row gap-6 lg:gap-10 p-6">
+        <div className="w-full rounded-[20px] std-backdrop-blur bg-gradient-to-r from-[#d9d9d91f] to-[#7373731f] flex flex-col lg:flex-row gap-6 lg:gap-10 p-6 max-h-[calc(100vh-120px)] sm:max-h-none overflow-y-auto sm:overflow-visible">
           {/* Left: Image Section */}
           <div className="lg:w-[45%] flex-shrink-0">
             <Image
@@ -181,6 +183,7 @@ export default function ProjectModal({
               ))}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
